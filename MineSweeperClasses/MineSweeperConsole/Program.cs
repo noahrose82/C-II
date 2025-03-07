@@ -64,30 +64,4 @@ class Program
             Console.WriteLine();
         }
     }
-
-    static bool ProcessInput(string input, Board board)
-    {
-        string[] parts = input.Split(' ');
-        if (parts.Length != 2 || !int.TryParse(parts[0], out int row) || !int.TryParse(parts[1], out int col))
-        {
-            Console.WriteLine("Invalid input. Enter row and column numbers.");
-            return false;
-        }
-
-        if (row < 0 || row >= board.Size || col < 0 || col >= board.Size)
-        {
-            Console.WriteLine("Out of bounds! Try again.");
-            return false;
-        }
-
-        if (board.Cells[row, col].IsVisited)
-        {
-            Console.WriteLine("Already revealed! Try another cell.");
-            return false;
-        }
-
-        board.Cells[row, col].IsVisited = true;
-
-        return true;
-    }
 }

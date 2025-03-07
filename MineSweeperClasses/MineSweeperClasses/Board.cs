@@ -19,7 +19,6 @@
             Difficulty = difficulty;
             Cells = new Cell[size, size];
 
-
             for (int i = 0; i < Size; i++)
             {
                 for (int j = 0; j < Size; j++)
@@ -103,7 +102,6 @@
             }
         }
 
-        // Used during setup to place rewards on the board
         private void SetupRewards()
         {
             int totalRewards = (int)(Size * Size * 0.05); // Example: 5% of cells get rewards
@@ -122,7 +120,6 @@
             }
         }
 
-        // Used every turn to determine the current game state
         public GameStatus DetermineGameState()
         {
             int unrevealedCells = 0;
@@ -140,7 +137,6 @@
 
             foreach (var cell in Cells)
             {
-                if (cell.IsVisited && cell.IsBomb)
                     return GameStatus.Lost;
             }
 
