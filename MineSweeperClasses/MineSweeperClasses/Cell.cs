@@ -1,5 +1,3 @@
-﻿using System;
-
 namespace MineSweeperClasses
 {
     public class Cell
