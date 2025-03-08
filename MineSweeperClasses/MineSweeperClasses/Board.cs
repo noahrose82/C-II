@@ -1,81 +1,68 @@
-﻿namespace MineSweeperClasses
+﻿using System;
+
+namespace MineSweeperClasses
 {
     public class Board
     {
-        public int Size { get; set; }
-        public float Difficulty { get; set; }
-        public Cell[,] Cells { get; set; }
-        public int RewardsRemaining { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public int Size { get; private set; }
+        public Cell[,] Cells { get; private set; }
 
-        public enum GameStatus { InProgress, Won, Lost }
+        public enum GameStatus { Playing, Won, Lost }
 
-        private Random random = new Random();
-
-        public Board(int size, float difficulty)
+        public Board(int size, float bombProbability)
         {
             Size = size;
             Cells = new Cell[size, size];
+            Random rand = new Random();
 
-            for (int i = 0; i < Size; i++)
+            for (int i = 0; i < size; i++)
             {
-                for (int j = 0; j < Size; j++)
+                for (int j = 0; j < size; j++)
                 {
-                    Cells[i, j] = new Cell();  // Ensure every cell is instantiated
+                    Cells[i, j] = new Cell();
+                    if (rand.NextDouble() < bombProbability)
+                        Cells[i, j].IsBomb = true;
                 }
             }
 
-            RewardsRemaining = 0;
-            InitializeBoard();
+            CalculateNeighborBombs();
         }
 
-        private void InitializeBoard()
+        private void CalculateNeighborBombs()
         {
             for (int i = 0; i < Size; i++)
             {
                 for (int j = 0; j < Size; j++)
                 {
-                    Cells[i, j].NumberOfBombNeighbors = GetNumberOfBombNeighbors(i, j);
+                    if (!Cells[i, j].IsBomb)
+                    {
+                        int count = 0;
+
+                        for (int x = -1; x <= 1; x++)
+                        {
+                            for (int y = -1; y <= 1; y++)
+                            {
+                                int ni = i + x, nj = j + y;
+                                if (ni >= 0 && ni < Size && nj >= 0 && nj < Size && Cells[ni, nj].IsBomb)
+                                    count++;
+                            }
+                        }
+
+                        Cells[i, j].NumberOfBombNeighbors = count;
+                    }
                 }
             }
         }
 
-        // Helper function to determine the number of bomb neighbors for a cell
-        private int GetNumberOfBombNeighbors(int i, int j)
+        public void UseSpecialBonus(int row, int col)
         {
-            int count = 0;
-
-            for (int d = 0; d < 8; d++)
+            for (int x = -1; x <= 1; x++)
             {
-                int ni = i + dx[d];
-                int nj = j + dy[d];
-
-                if (IsCellOnBoard(ni, nj) && Cells[ni, nj].IsBomb)
+                for (int y = -1; y <= 1; y++)
                 {
-                    count++;
-                }
-            }
-            return count;
-        }
-                }
-            }
-        }
-
-        private void SetupRewards()
-        {
-            int totalRewards = (int)(Size * Size * 0.05); // Example: 5% of cells get rewards
-            int placedRewards = 0;
-
-            while (placedRewards < totalRewards)
-            {
-                int row = random.Next(Size);
-                int col = random.Next(Size);
-
-                if (!Cells[row, col].IsBomb && !Cells[row, col].IsFlagged)
-                {
-                    RewardsRemaining++;
-                    placedRewards++;
+                    int ni = row + x, nj = col + y;
+                    if (ni >= 0 && ni < Size && nj >= 0 && nj < Size && !Cells[ni, nj].IsBomb)
+                        Cells[ni, nj].IsVisited = true;
                 }
             }
         }
@@ -85,11 +72,9 @@
             foreach (var cell in Cells)
             {
                 if (!cell.IsVisited && !cell.IsBomb)
-                {
-                    unrevealedCells++;
-                }
+                    return GameStatus.Playing;
             }
-                return GameStatus.Won;
+            return GameStatus.Won;
         }
     }
 }

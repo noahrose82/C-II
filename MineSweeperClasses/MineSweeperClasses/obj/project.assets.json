@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\james\\source\\repos\\MineSweeperClasses\\MineSweeperClasses\\MineSweeperClasses.csproj",
+      "projectUniqueName": "C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MineSweeperClasses\\MineSweeperClasses.csproj",
       "projectName": "MineSweeperClasses",
-      "projectPath": "C:\\Users\\james\\source\\repos\\MineSweeperClasses\\MineSweeperClasses\\MineSweeperClasses.csproj",
+      "projectPath": "C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MineSweeperClasses\\MineSweeperClasses.csproj",
       "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\james\\source\\repos\\MineSweeperClasses\\MineSweeperClasses\\obj\\",
+      "outputPath": "C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MineSweeperClasses\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,7 +33,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
