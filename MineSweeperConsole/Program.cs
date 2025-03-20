@@ -28,13 +28,19 @@ class Program
                 continue;
             }
 
+            if (row < 0 || row >= board.Size || col < 0 || col >= board.Size)
+            {
+                Console.WriteLine("Invalid input. Row and column out of range.");
+                continue;
+            }
+
             Console.Write("Choose an action (1: Flag, 2: Visit, 3: Use Reward): ");
             string actionInput = Console.ReadLine();
 
             // **Hidden Feature: Instantly Win**
             if (actionInput == "777")
             {
-                board.SolveGame();
+                SolveGame(board);
                 victory = true;
                 Console.Clear();
                 PrintBoard(board);
@@ -44,7 +50,7 @@ class Program
 
             if (actionInput == "666")
             {
-                board.SolveGame(true);
+                SolveGame(board);
                 death = true;
                 Console.Clear();
                 PrintBoard(board);
@@ -71,7 +77,7 @@ class Program
                     }
                     else
                     {
-                        board.FloodFill(row, col);
+                        board.FloodFill(row, col); // 🚀 FloodFill added here
                     }
                     break;
 
@@ -131,6 +137,20 @@ class Program
         }
     }
 
+    static void SolveGame(Board board)
+    {
+        for (int i = 0; i < board.Size; i++)
+        {
+            for (int j = 0; j < board.Size; j++)
+            {
+                if (board.Cells[i, j].IsBomb)
+                    board.Cells[i, j].IsFlagged = true;
+                else
+                    board.Cells[i, j].IsVisited = true;
+            }
+        }
+    }
+
     static void PrintBoard(Board board)
     {
         Console.Clear();
@@ -169,18 +189,6 @@ class Program
                     }
                     else
                     {
-                        Console.ForegroundColor = cell.NumberOfBombNeighbors switch
-                        {
-                            1 => ConsoleColor.Green,
-                            2 => ConsoleColor.Blue,
-                            3 => ConsoleColor.Red,
-                            4 => ConsoleColor.Cyan,
-                            5 => ConsoleColor.Magenta,
-                            6 => ConsoleColor.Yellow,
-                            7 => ConsoleColor.Gray,
-                            8 => ConsoleColor.White,
-                            _ => ConsoleColor.DarkGray
-                        };
                         Console.Write($" {cell.NumberOfBombNeighbors} ");
                     }
                 }
