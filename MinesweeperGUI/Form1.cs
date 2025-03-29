@@ -1,27 +1,30 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.Windows.Forms;
 using MineSweeperClasses;
 
 namespace MinesweeperGUI
 {
-    public partial class Form1 : Form
+   public partial class Form1 : Form
     {
+        // Existing fields and methods...
+
+        private void ShowForm3()
+        {
+            Form3 form3 = new Form3(score); // Pass the score to Form3
+            form3.ShowDialog(); // Show Form3 as a dialog
+        }
         private Board board;
         private Button[,] buttons;
         private int gridSize;
         private float difficulty;
         private int secondsElapsed;
         private int score;
-        private System.Windows.Forms.Timer gameTimer;  // Explicitly using System.Windows.Forms.Timer
+        private System.Windows.Forms.Timer gameTimer;
         private Label timeLabel;
         private Label scoreLabel;
         private Dictionary<string, Image> tileImages;
-        private Image hiddenTile = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\hidden.png");
-        private Image emptyTile = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\empty.png");
-        private Image bombTile = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\bomb.png");
-        private Image flagTile = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\flag.png");
         private Image[] numberTiles;
 
         private void LoadImages()
@@ -73,6 +76,15 @@ namespace MinesweeperGUI
                 numberTiles[i] = Image.FromFile($"C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MinesweeperGUI\\bin\\Debug\\net8.0-windows\\eight.png");
 
             }
+            this.ClientSize = new Size(gridSize * 60, gridSize * 60 + 100);
+            buttons = new Button[gridSize, gridSize];
+
+            InitializeUI();
+            gameTimer = new System.Windows.Forms.Timer { Interval = 1000 };
+            gameTimer.Tick += GameTimer_Tick;
+            secondsElapsed = 0;
+            score = 0;
+            gameTimer.Start();
 
             for (int r = 0; r < gridSize; r++)
             {
@@ -80,11 +92,11 @@ namespace MinesweeperGUI
                 {
                     Button btn = new Button
                     {
-                        Width = 30,
-                        Height = 30,
-                        Location = new Point(c * 30, r * 30),
+                        Width = 60,
+                        Height = 60,
+                        Location = new Point(c * 60, r * 60),
                         Tag = new Point(r, c),
-                        BackgroundImage = hiddenTile,
+                        BackgroundImage = tileImages["hidden"],
                         BackgroundImageLayout = ImageLayout.Stretch
                     };
                     btn.MouseDown += OnCellClick;
@@ -93,46 +105,99 @@ namespace MinesweeperGUI
                 }
             }
 
-            // Add Restart Button
-            Button restartButton = new Button
+            Button restartButton = new()
             {
                 Text = "Restart",
-                Location = new Point(10, gridSize * 30 + 10),
+                Location = new Point(20, gridSize * 60 + 40),
                 Width = 80,
                 Height = 30
             };
             restartButton.Click += RestartGame;
-            Controls.Add(restartButton);
+
+
+            this.Controls.Add(restartButton);
         }
-        
+        private void restartButton_Click(object sender, EventArgs e)
+        {
+            BindingSource bs = new BindingSource();
+            Form3 form3 = new Form3(score); // Pass the score to the Form3 constructor
+            form3.ShowDialog(); // Show Form3 as a dialog
+        }
+    
+
+        private void InitializeUI()
+        {
+            timeLabel = new Label
+            {
+                Text = "Time: 00:00",
+                Font = new Font("Arial", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = Color.Navy,
+                AutoSize = true,
+                Location = new Point(20, gridSize * 60 + 20)
+            };
+            Controls.Add(timeLabel);
+
+            scoreLabel = new Label
+            {
+                Text = "Score: 0",
+                Font = new Font("Arial", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = Color.Navy,
+                AutoSize = true,
+                Location = new Point(150, gridSize * 60 + 20)
+            };
+            Controls.Add(scoreLabel);
+        }
+
+        private void GameTimer_Tick(object sender, EventArgs e)
+        {
+            secondsElapsed++;
+            TimeSpan timeSpan = TimeSpan.FromSeconds(secondsElapsed);
+            timeLabel.Text = $"Time: {timeSpan:mm\\:ss}";
+        }
 
         private void OnCellClick(object sender, MouseEventArgs e)
         {
-            Button btn = sender as Button;
-            Point pos = (Point)btn.Tag;
-            int r = pos.X, c = pos.Y;
-
-            if (e.Button == MouseButtons.Right) // Right-click for flag F
+            if (sender is Button btn)
             {
-                board.Cells[r, c].IsFlagged = !board.Cells[r, c].IsFlagged;
-                btn.Text = board.Cells[r, c].IsFlagged ? "F" : "";
-                return;
-            }
+                if (btn.Tag is Point pos)
+                {
+                    int r = pos.X, c = pos.Y;
 
-            if (board.Cells[r, c].IsBomb)
-            {
-                MessageBox.Show("Game Over! You hit a mine.");
-                RevealAllCells();
-                return;
-            }
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        board.Cells[r, c].IsFlagged = !board.Cells[r, c].IsFlagged;
+                        btn.BackgroundImage = board.Cells[r, c].IsFlagged ? tileImages["flag"] : tileImages["hidden"];
+                        return;
+                    }
 
-            board.FloodFill(r, c);
-            UpdateBoard();
+                    if (board.Cells[r, c].IsBomb)
+                    {
+                        gameTimer.Stop();
+                        MessageBox.Show($"You hit a bomb! Game Over!\nTime: {timeLabel.Text}\nScore: {score}", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        RevealAllCells();
+                        ShowForm3(); // Show Form3 when the game is over
+                        return;
+                    }
 
-            if (board.DetermineGameState() == Board.GameStatus.Won)
-            {
-                MessageBox.Show("Congratulations! You won!");
-                RevealAllCells();
+                    if (!board.Cells[r, c].IsVisited)
+                    {
+                        board.FloodFill(r, c);
+                        score += 10;
+                        scoreLabel.Text = $"Score: {score}";
+                    }
+
+                    UpdateBoard();
+
+                    if (board.DetermineGameState() == Board.GameStatus.Won)
+                    {
+                        gameTimer.Stop();
+                        MessageBox.Show($"Congratulations! You won!\nTime: {timeLabel.Text}\nScore: {score}", "Victory!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        RevealAllCells();
+                        ShowForm3(); // Show Form3 when the game is won
+                    }
+                }
             }
         }
 
@@ -143,32 +208,15 @@ namespace MinesweeperGUI
                 for (int c = 0; c < gridSize; c++)
                 {
                     var cell = board.Cells[r, c];
-
                     if (cell.IsFlagged)
                     {
                         buttons[r, c].BackgroundImage = tileImages["flag"];
-                        buttons[r, c].BackgroundImageLayout = ImageLayout.Stretch;
                         continue;
                     }
-
                     if (cell.IsVisited)
                     {
                         buttons[r, c].Enabled = false;
-                        if (cell.IsBomb)
-                            buttons[r, c].BackgroundImage = tileImages["bomb"];
-                        else
-                            buttons[r, c].BackgroundImage = tileImages[cell.NumberOfBombNeighbors.ToString()];
-
-                        buttons[r, c].BackgroundImageLayout = ImageLayout.Stretch;
-                    }
-                    if (cell.IsVisited)
-                    {
-                        buttons[r, c].Enabled = false;
-                        if (cell.IsBomb)
-                            buttons[r, c].BackgroundImage = tileImages["bomb"];
-                        else
-                            buttons[r, c].BackgroundImage = tileImages[cell.NumberOfBombNeighbors.ToString()];
-
+                        buttons[r, c].BackgroundImage = tileImages[cell.IsBomb ? "bomb" : cell.NumberOfBombNeighbors.ToString()];
                         buttons[r, c].BackgroundImageLayout = ImageLayout.Stretch;
                     }
                 }
@@ -181,13 +229,9 @@ namespace MinesweeperGUI
             {
                 for (int c = 0; c < gridSize; c++)
                 {
-                    var cell = board.Cells[r, c]; // Add this line to define 'cell'
+                    var cell = board.Cells[r, c];
                     buttons[r, c].Enabled = false;
-                    if (cell.IsBomb)
-                        buttons[r, c].BackgroundImage = tileImages["bomb"];
-                    else
-                        buttons[r, c].BackgroundImage = tileImages[cell.NumberOfBombNeighbors.ToString()];
-
+                    buttons[r, c].BackgroundImage = tileImages[cell.IsBomb ? "bomb" : cell.NumberOfBombNeighbors.ToString()];
                     buttons[r, c].BackgroundImageLayout = ImageLayout.Stretch;
                 }
             }
@@ -195,6 +239,11 @@ namespace MinesweeperGUI
 
         private void RestartGame(object sender, EventArgs e)
         {
+            gameTimer.Stop();
+            secondsElapsed = 0;
+            score = 0;
+            timeLabel.Text = "Time: 00:00";
+            scoreLabel.Text = "Score: 0";
             Controls.Clear();
             board = new Board(gridSize, difficulty);
             InitializeGame();

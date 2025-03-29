@@ -7,6 +7,7 @@ namespace MinesweeperGUI
     {
         public int GridSize { get; private set; } = 8;  // Default size
         public float Difficulty { get; private set; } = 0.15f; // Default difficulty
+       
 
         public Form2()
         {

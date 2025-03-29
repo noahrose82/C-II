@@ -6,8 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-	  <LangVersion>13.0</LangVersion>
-  </PropertyGroup>
+	</PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MineSweeperClasses\MineSweeperClasses.csproj" />
