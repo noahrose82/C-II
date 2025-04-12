@@ -40,24 +40,24 @@
             label1.AutoSize = true;
             label1.Location = new Point(765, 47);
             label1.Name = "label1";
-            label1.Size = new Size(64, 15);
+            label1.Size = new Size(0, 0);
             label1.TabIndex = 1;
-            label1.Text = "Start Time:";
+            label1.Text = "";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Location = new Point(765, 121);
             label3.Name = "label3";
-            label3.Size = new Size(39, 15);
+            label3.Size = new Size(0, 0);
             label3.TabIndex = 3;
-            label3.Text = "Score:";
+            label3.Text = "";
             // 
             // button1
             // 
             button1.Location = new Point(270, 600);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(0, 0);
             button1.TabIndex = 5;
             button1.Text = "Restart";
             button1.UseVisualStyleBackColor = true;
@@ -68,18 +68,18 @@
             label4.AutoSize = true;
             label4.Location = new Point(765, 145);
             label4.Name = "label4";
-            label4.Size = new Size(38, 15);
+            label4.Size = new Size(0, 0);
             label4.TabIndex = 4;
-            label4.Text = "label4";
+            label4.Text = "";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(765, 71);
             label2.Name = "label2";
-            label2.Size = new Size(37, 15);
+            label2.Size = new Size(0, 0);
             label2.TabIndex = 2;
-            label2.Text = "Time:";
+            label2.Text = "";
             // 
             // Form1
             // 

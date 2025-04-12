@@ -1,0 +1,666 @@
+{
+  "Board": {
+    "bombProbability": 0.0,
+    "Size": 8,
+    "Cells": [
+      [
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 2,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        }
+      ],
+      [
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": true,
+          "IsVisited": false,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 2,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": true,
+          "IsVisited": false,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 2,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        }
+      ],
+      [
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": true
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 3,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 2,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 3,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": true,
+          "IsVisited": false,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        }
+      ],
+      [
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": true,
+          "IsVisited": false,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 3,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 2,
+          "IsReward": false
+        }
+      ],
+      [
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 2,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": true,
+          "IsVisited": false,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        }
+      ],
+      [
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 1,
+          "IsReward": false
+        }
+      ],
+      [
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 2,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": true,
+          "IsVisited": false,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 2,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        }
+      ],
+      [
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 2,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": true,
+          "IsVisited": false,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 2,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        },
+        {
+          "IsMine": false,
+          "IsRevealed": false,
+          "NeighborMines": 0,
+          "IsBomb": false,
+          "IsVisited": true,
+          "IsFlagged": false,
+          "NumberOfBombNeighbors": 0,
+          "IsReward": false
+        }
+      ]
+    ]
+  },
+  "Score": 25,
+  "Time": 25
+}

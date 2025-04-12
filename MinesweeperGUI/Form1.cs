@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using MineSweeperClasses;
+using System.IO;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Diagnostics;
+using System.Text.Json;
 
 namespace MinesweeperGUI
 {
-   public partial class Form1 : Form
+    public partial class Form1 : Form
     {
-        // Existing fields and methods...
-
-        private void ShowForm3()
-        {
-            Form3 form3 = new Form3(score); // Pass the score to Form3
-            form3.ShowDialog(); // Show Form3 as a dialog
-        }
+        private MinesweeperGame game;
         private Board board;
         private Button[,] buttons;
         private int gridSize;
@@ -26,6 +24,24 @@ namespace MinesweeperGUI
         private Label scoreLabel;
         private Dictionary<string, Image> tileImages;
         private Image[] numberTiles;
+        private string filePath;
+
+        // Constructor with initialization
+        public Form1(int size, float bombProbability)
+        {
+            gridSize = size;
+            difficulty = bombProbability;
+            board = new Board(gridSize, difficulty);
+            game = new MinesweeperGame(gridSize, difficulty); // Initialize the game object
+
+            LoadImages(); // Ensure this is called before InitializeComponent
+            InitializeComponent();
+            InitializeGame();
+            ResizeFormToFitBoard();
+
+            // Set default file path for saving/loading game state
+            filePath = Path.Combine(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\Saves", "gameSave.json");
+        }
 
         private void LoadImages()
         {
@@ -46,17 +62,105 @@ namespace MinesweeperGUI
             };
         }
 
-        public Form1(int size, float bombProbability)
-        {
-            gridSize = size;
-            difficulty = bombProbability;
-            board = new Board(gridSize, difficulty);
 
-            LoadImages(); // Ensure this is called before InitializeComponent
-            InitializeComponent();
-            InitializeGame();
+
+        // Save the game state to a JSON file
+        private void SaveGame(object sender, EventArgs e)
+        {
+            try
+            {
+                // Assuming GameState is the object you want to save
+                float difficulty = 1.5f; // Example float value
+                string difficultyStr = difficulty.ToString(); // Convert to string
+                GameState gameState = new GameState(score, secondsElapsed, gridSize, difficultyStr);
+
+                string jsonString = JsonSerializer.Serialize(gameState);
+
+                // Save to file
+                File.WriteAllText(filePath, jsonString);
+
+                MessageBox.Show("Game saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving game: {ex.Message}");
+            }
         }
 
+
+        // Load the game state from a JSON file
+        private void LoadGame(object sender, EventArgs e)
+        {
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    // Read the JSON string from the save file
+                    string jsonString = File.ReadAllText(filePath);
+
+                    // Deserialize the string into a GameState object
+                    GameState? loadedGameState = JsonSerializer.Deserialize<GameState>(jsonString);
+
+                    if (loadedGameState != null)
+                    {
+                        // Use the loaded game state (e.g., update the score, grid size, etc.)
+                        score = loadedGameState.Score;
+                        secondsElapsed = loadedGameState.SecondsElapsed;
+                        gridSize = loadedGameState.GridSize;
+                        difficulty = loadedGameState.Difficulty;
+
+                        MessageBox.Show("Game loaded successfully!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to load the game state.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error loading game: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Save file not found.");
+            }
+        }
+
+
+
+
+        // Helper method to get the current board state for saving
+        private int[,] GetBoardState()
+        {
+            int[,] boardState = new int[gridSize, gridSize];
+
+            for (int r = 0; r < gridSize; r++)
+            {
+                for (int c = 0; c < gridSize; c++)
+                {
+                    boardState[r, c] = board.Cells[r, c].IsBomb ? 1 : 0;  // Simplified (1 for bomb, 0 for empty)
+                }
+            }
+
+            return boardState;
+        }
+
+        // Helper method to set the board state when loading the game
+        private void SetBoardState(int[,] boardState)
+        {
+            for (int r = 0; r < gridSize; r++)
+            {
+                for (int c = 0; c < gridSize; c++)
+                {
+                    board.Cells[r, c].IsBomb = boardState[r, c] == 1;
+                    board.Cells[r, c].IsVisited = false;  // Assuming all cells are unvisited after loading
+                    board.Cells[r, c].IsFlagged = false;  // Assuming no cells are flagged
+                }
+            }
+        }
+
+        // Initialize the game UI and game state
         private void InitializeGame()
         {
             this.ClientSize = new Size(gridSize * 30, gridSize * 30 + 50);
@@ -64,20 +168,17 @@ namespace MinesweeperGUI
 
             // Load numbered tiles (1-8)
             numberTiles = new Image[9];
-            for (int i = 1; i <= 8; i++)
-            {
-                numberTiles[i] = Image.FromFile($"C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MinesweeperGUI\\bin\\Debug\\net8.0-windows\\one.png");
-                numberTiles[i] = Image.FromFile($"C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MinesweeperGUI\\bin\\Debug\\net8.0-windows\\two.png");
-                numberTiles[i] = Image.FromFile($"C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MinesweeperGUI\\bin\\Debug\\net8.0-windows\\three.png");
-                numberTiles[i] = Image.FromFile($"C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MinesweeperGUI\\bin\\Debug\\net8.0-windows\\four.png");
-                numberTiles[i] = Image.FromFile($"C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MinesweeperGUI\\bin\\Debug\\net8.0-windows\\five.png");
-                numberTiles[i] = Image.FromFile($"C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MinesweeperGUI\\bin\\Debug\\net8.0-windows\\six.png");
-                numberTiles[i] = Image.FromFile($"C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MinesweeperGUI\\bin\\Debug\\net8.0-windows\\seven.png");
-                numberTiles[i] = Image.FromFile($"C:\\Users\\james\\source\\repos\\noahrose82\\C-II\\MineSweeperClasses\\MinesweeperGUI\\bin\\Debug\\net8.0-windows\\eight.png");
+            numberTiles[0] = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\empty.png");
+            numberTiles[1] = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\one.png");
+            numberTiles[2] = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\two.png");
+            numberTiles[3] = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\three.png");
+            numberTiles[4] = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\four.png");
+            numberTiles[5] = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\five.png");
+            numberTiles[6] = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\six.png");
+            numberTiles[7] = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\seven.png");
+            numberTiles[8] = Image.FromFile(@"C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MinesweeperGUI\bin\Debug\net8.0-windows\eight.png");
 
-            }
-            this.ClientSize = new Size(gridSize * 60, gridSize * 60 + 100);
-            buttons = new Button[gridSize, gridSize];
+
 
             InitializeUI();
             gameTimer = new System.Windows.Forms.Timer { Interval = 1000 };
@@ -85,7 +186,6 @@ namespace MinesweeperGUI
             secondsElapsed = 0;
             score = 0;
             gameTimer.Start();
-
             for (int r = 0; r < gridSize; r++)
             {
                 for (int c = 0; c < gridSize; c++)
@@ -104,8 +204,8 @@ namespace MinesweeperGUI
                     Controls.Add(btn);
                 }
             }
-
-            Button restartButton = new()
+            
+            Button restartButton = new Button
             {
                 Text = "Restart",
                 Location = new Point(20, gridSize * 60 + 40),
@@ -113,18 +213,31 @@ namespace MinesweeperGUI
                 Height = 30
             };
             restartButton.Click += RestartGame;
-
-
             this.Controls.Add(restartButton);
-        }
-        private void restartButton_Click(object sender, EventArgs e)
-        {
-            BindingSource bs = new BindingSource();
-            Form3 form3 = new Form3(score); // Pass the score to the Form3 constructor
-            form3.ShowDialog(); // Show Form3 as a dialog
-        }
-    
 
+            Button saveButton = new Button
+            {
+                Text = "Save Game",
+                Location = new Point(20, gridSize * 60 + 80), // Adjust Y position to avoid overlap
+                Width = 80,
+                Height = 30
+            };
+            saveButton.Click += SaveGame;
+            Controls.Add(saveButton);
+
+
+            Button loadButton = new Button
+            {
+                Text = "Load Game",
+                Location = new Point(120, gridSize * 60 + 80), // Adjust Y position to avoid overlap
+                Width = 80,
+                Height = 30
+            };
+            loadButton.Click += LoadGame;
+            Controls.Add(loadButton);
+        }
+
+        // Initialize the UI components (score, time labels)
         private void InitializeUI()
         {
             timeLabel = new Label
@@ -148,8 +261,19 @@ namespace MinesweeperGUI
                 Location = new Point(150, gridSize * 60 + 20)
             };
             Controls.Add(scoreLabel);
+
+            Button safeRevealButton = new Button
+            {
+                Text = "Safe Reveal",
+                Location = new Point(120, gridSize * 60 + 40),
+                Width = 100,
+                Height = 30
+            };
+            safeRevealButton.Click += ButtonSafeReveal_Click;
+            Controls.Add(safeRevealButton);
         }
 
+        // Timer tick event to track elapsed time
         private void GameTimer_Tick(object sender, EventArgs e)
         {
             secondsElapsed++;
@@ -157,8 +281,44 @@ namespace MinesweeperGUI
             timeLabel.Text = $"Time: {timeSpan:mm\\:ss}";
         }
 
+        // Handle Safe Reveal button click
+        private void ButtonSafeReveal_Click(object sender, EventArgs e)
+        {
+            Point? result = game.UseSafeReveal();
+
+            if (result.HasValue)
+            {
+                int x = result.Value.X;
+                int y = result.Value.Y;
+
+                var tile = buttons[x, y];
+                var tileData = board.Cells[x, y];
+                board.FloodFill(x, y);
+
+                score += 10;
+                scoreLabel.Text = $"Score: {score}";
+                UpdateBoard();
+                tile.Text = tileData.IsBomb ? "M" : tileData.NumberOfBombNeighbors.ToString();
+                tile.Enabled = false;
+                tile.BackColor = Color.LightGreen;
+
+                MessageBox.Show($"Safe tile revealed at ({x}, {y})!");
+            }
+            else
+            {
+                MessageBox.Show("No more safe reveals left!");
+            }
+        }
+
+        // Handle cell click (left or right mouse)
         private void OnCellClick(object sender, MouseEventArgs e)
         {
+            if (game == null)
+            {
+                MessageBox.Show("Game has not been initialized.");
+                return;
+            }
+
             if (sender is Button btn)
             {
                 if (btn.Tag is Point pos)
@@ -201,6 +361,19 @@ namespace MinesweeperGUI
             }
         }
 
+        private void ResizeFormToFitBoard()
+        {
+            int buttonSize = 60; // matches the button dimensions used
+            int paddingWidth = 40;
+            int paddingHeight = 160; // includes room for labels/buttons below
+
+            this.ClientSize = new Size(
+                gridSize * buttonSize + paddingWidth,
+                gridSize * buttonSize + paddingHeight
+            );
+        }
+
+        // Update the board after a move
         private void UpdateBoard()
         {
             for (int r = 0; r < gridSize; r++)
@@ -223,6 +396,7 @@ namespace MinesweeperGUI
             }
         }
 
+        // Reveal all cells (game over or victory)
         private void RevealAllCells()
         {
             for (int r = 0; r < gridSize; r++)
@@ -237,6 +411,7 @@ namespace MinesweeperGUI
             }
         }
 
+        // Restart the game
         private void RestartGame(object sender, EventArgs e)
         {
             gameTimer.Stop();
@@ -246,7 +421,15 @@ namespace MinesweeperGUI
             scoreLabel.Text = "Score: 0";
             Controls.Clear();
             board = new Board(gridSize, difficulty);
+            game = new MinesweeperGame(gridSize, difficulty); // Reinitialize the game object
             InitializeGame();
+        }
+
+        // Show Form3 after game ends
+        private void ShowForm3()
+        {
+            Form3 form3 = new Form3(score); // Pass the score to Form3
+            form3.ShowDialog(); // Show Form3 as a dialog
         }
     }
 }

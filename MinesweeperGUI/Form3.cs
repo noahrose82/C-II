@@ -93,7 +93,7 @@ namespace MinesweeperGUI
 
         private void txtName_TextChanged(object sender, EventArgs e)
         {
-            // Handle text change if necessary
+           
         }
     }
 }
