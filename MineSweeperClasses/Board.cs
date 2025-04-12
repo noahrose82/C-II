@@ -2,6 +2,7 @@
 
 namespace MineSweeperClasses
 {
+    [Serializable]
     public class Board
     {
         public int Size { get; private set; }

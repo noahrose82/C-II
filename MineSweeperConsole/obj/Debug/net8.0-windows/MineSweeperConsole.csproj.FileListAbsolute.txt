@@ -1,0 +1,6 @@
+C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MineSweeperConsole\obj\Debug\net8.0-windows\MineSweeperConsole.csproj.AssemblyReference.cache
+C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MineSweeperConsole\obj\Debug\net8.0-windows\MineSweeperConsole.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MineSweeperConsole\obj\Debug\net8.0-windows\MineSweeperConsole.AssemblyInfoInputs.cache
+C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MineSweeperConsole\obj\Debug\net8.0-windows\MineSweeperConsole.AssemblyInfo.cs
+C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MineSweeperConsole\obj\Debug\net8.0-windows\MineSweeperConsole.csproj.CoreCompileInputs.cache
+C:\Users\james\source\repos\noahrose82\C-II\MineSweeperClasses\MineSweeperConsole\obj\Debug\net8.0-windows\MineSweeperConsole.sourcelink.json
